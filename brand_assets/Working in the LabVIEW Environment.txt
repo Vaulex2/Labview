@@ -1,0 +1,168 @@
+2-ma’ruza: LabVIEW muhitida ishlash
+1. LabVIEW ishchi muhiti bilan tanishish
+LabVIEW dasturi grafik dasturlash muhitiga asoslangan bo‘lib, foydalanuvchiga virtual instrumentlar yaratish imkonini beradi. Dastur ishga tushirilganda foydalanuvchi asosiy ishchi muhit oynasi bilan ishlaydi. Ushbu muhit dastur yaratish, tahrirlash, ishga tushirish va natijalarni kuzatish uchun mo‘ljallangan.
+LabVIEW muhitida ishlash jarayoni asosan Front Panel va Block Diagram oynalari orqali amalga oshiriladi. Har bir yaratilgan loyiha virtual instrument (VI) deb ataladi va u foydalanuvchi interfeysi hamda dastur logikasidan tashkil topadi.
+
+2. Front Panel oynasi
+Front Panel — bu foydalanuvchi interfeysi hisoblanadi. Ushbu oynada turli boshqaruv elementlari va indikatorlar joylashtiriladi. Front Panel orqali foydalanuvchi dastur bilan bevosita ishlaydi.
+Front Panel elementlari:
+?
+Controls — ma’lumot kiritish elementlari
+?
+?
+Indicators — natijalarni ko‘rsatish elementlari
+?
+?
+Buttons — tugmalar
+?
+?
+Numeric Controls — sonli qiymatlar
+?
+?
+Graphs va Charts — grafik ko‘rsatkichlar
+?
+Front Panel oynasi real qurilma paneliga o‘xshash tarzda ishlaydi va foydalanuvchi uchun qulay interfeys yaratadi.
+
+3. Block Diagram oynasi
+Block Diagram — dastur logikasi joylashgan asosiy ishchi maydon hisoblanadi. Bu yerda funksional bloklar o‘zaro ulanadi va ma’lumot oqimi tashkil qilinadi.
+Block Diagram tarkibi:
+?
+Functions Palette
+?
+?
+Structures
+?
+?
+Mathematical Functions
+?
+?
+Data Flow elementlari
+?
+?
+Wires (ulanish chiziqlari)
+?
+LabVIEW dasturida kod yozish o‘rniga bloklar o‘zaro bog‘lanadi. Har bir blok ma’lum bir vazifani bajaradi va ma’lumotlar wire orqali uzatiladi.
+
+4. Controls Palette va Functions Palette
+LabVIEW muhitida elementlarni qo‘shish uchun maxsus palitralardan foydalaniladi.
+Controls Palette
+Front Panel uchun elementlar qo‘shiladi:
+?
+Tugmalar
+?
+?
+Sliderlar
+?
+?
+Numeric input
+?
+?
+Boolean elementlar
+?
+?
+Grafik indikatorlar
+?
+Functions Palette
+Block Diagram uchun funksiyalar qo‘shiladi:
+?
+Arithmetic functions
+?
+?
+Logic operations
+?
+?
+Loops
+?
+?
+Structures
+?
+?
+Signal processing bloklari
+?
+Bu palitralar dastur yaratishni ancha tez va qulay qiladi.
+
+5. Ma’lumot oqimi modeli (Data Flow)
+LabVIEW dasturining asosiy ishlash prinsipi Data Flow modeliga asoslangan. Dastur bloklari ma’lumot tayyor bo‘lgandagina ishlaydi.
+Bu model quyidagi afzalliklarni beradi:
+?
+Parallel ishlash imkoniyati
+?
+?
+Tez bajarilish
+?
+?
+Vizual tushunarlilik
+?
+?
+Murakkab tizimlarni soddalashtirish
+?
+Data Flow modeli LabVIEWning eng muhim xususiyatlaridan biri hisoblanadi.
+
+6. Virtual Instrument (VI) yaratish
+LabVIEWda har bir loyiha Virtual Instrument (VI) sifatida saqlanadi.
+VI quyidagilardan iborat:
+?
+Front Panel
+?
+?
+Block Diagram
+?
+?
+Icon/Connector Pane
+?
+Virtual instrument yaratish jarayoni:
+1.
+New VI yaratish
+2.
+3.
+Front Panelga elementlar joylashtirish
+4.
+5.
+Block Diagramda bloklarni ulash
+6.
+7.
+Dasturni ishga tushirish
+8.
+9.
+Natijalarni tekshirish
+10.
+
+7. Dasturni ishga tushirish va debugging
+LabVIEW dasturida VI yaratib bo‘lingandan so‘ng uni Run tugmasi orqali ishga tushirish mumkin.
+Debugging vositalari:
+?
+Highlight Execution
+?
+?
+Probe Tool
+?
+?
+Breakpoints
+?
+?
+Error List
+?
+Bu vositalar xatolarni topish va dastur ishlashini kuzatishga yordam beradi.
+
+8. LabVIEW muhitining afzalliklari
+LabVIEW muhiti foydalanuvchi uchun qulay va interaktiv dasturlash imkonini beradi.
+Asosiy afzalliklari:
+?
+Grafik dasturlash
+?
+?
+Tez interfeys yaratish
+?
+?
+Qurilmalar bilan ishlash
+?
+?
+Vizual debugging
+?
+?
+Muhandislik hisob-kitoblari
+?
+?
+Real vaqt monitoringi
+?
+Shu sababli LabVIEW sanoat, laboratoriya va ilmiy tadqiqotlarda keng qo‘llaniladi.

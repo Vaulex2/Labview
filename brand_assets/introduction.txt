@@ -1,0 +1,17 @@
+1-mavzu: LabVIEW dasturiga kirish
+1. “Dasturlashtirishlar bazasida texnik ilovalar” faniga kirish
+Hozirgi zamonaviy texnologiyalar davrida dasturlash texnik tizimlarni boshqarish, nazorat qilish va avtomatlashtirishning muhim qismiga aylandi. “Dasturlashtirishlar bazasida texnik ilovalar” fani talabalarga texnik jarayonlarni dasturiy vositalar yordamida yaratish va boshqarish usullarini o‘rgatadi. Ushbu fan orqali turli qurilmalar bilan ishlash, ma’lumotlarni qayta ishlash hamda avtomatlashtirilgan tizimlarni yaratish bo‘yicha nazariy va amaliy bilimlar shakllantiriladi.
+Mazkur fan ishlab chiqarish, laboratoriya tizimlari, sanoat avtomatikasi va muhandislik masalalarida keng qo‘llaniladigan dasturiy texnologiyalarni o‘rganishga yo‘naltirilgan. Fan davomida talabalar zamonaviy dasturlash muhitlari bilan ishlash, virtual instrumentlar yaratish va texnik tizimlarni monitoring qilish bo‘yicha ko‘nikmalarga ega bo‘ladilar.
+
+2. LabVIEW dasturi haqida umumiy ma’lumot
+LabVIEW (Laboratory Virtual Instrument Engineering Workbench) — bu National Instruments kompaniyasi tomonidan ishlab chiqilgan grafik dasturlash muhiti hisoblanadi. Ushbu dastur oddiy matnli kod yozish o‘rniga grafik bloklar va funksiyalar yordamida dastur yaratish imkonini beradi. Shu sababli LabVIEW dasturi muhandislik, ilmiy tadqiqot va avtomatlashtirish sohalarida keng qo‘llaniladi.
+LabVIEW dasturida foydalanuvchi virtual instrumentlar (VI — Virtual Instrument) yaratadi. Har bir virtual instrument foydalanuvchi interfeysi va blok diagrammasidan tashkil topadi. Front Panel foydalanuvchi bilan ishlash oynasi bo‘lsa, Block Diagram dastur logikasi joylashgan asosiy qism hisoblanadi. Grafik dasturlash usuli sababli murakkab jarayonlarni ham sodda va tushunarli tarzda yaratish mumkin.
+
+3. LabVIEWni qo‘llash sohalari
+LabVIEW dasturi turli texnik va ilmiy yo‘nalishlarda keng qo‘llaniladi. Ayniqsa sanoat avtomatikasi, ma’lumotlarni yig‘ish va qayta ishlash, sensor tizimlari, robototexnika hamda laboratoriya tadqiqotlarida muhim ahamiyatga ega.
+Dastur yordamida real vaqt rejimida qurilmalardan ma’lumot olish, ularni tahlil qilish va natijalarni grafik ko‘rinishda chiqarish mumkin. Shuningdek, LabVIEW elektron qurilmalarni boshqarish, test tizimlarini yaratish va ishlab chiqarish jarayonlarini monitoring qilish uchun ham ishlatiladi. Uning qulay interfeysi va keng imkoniyatlari 
+
+4. LabVIEW instrumental vositasi va uning imkoniyatlari
+LabVIEW dasturining asosiy afzalligi uning grafik dasturlash texnologiyasiga asoslanganidir. Dastur foydalanuvchiga turli tayyor funksional bloklar yordamida tez va samarali dastur yaratish imkonini beradi. Bu esa dasturlash jarayonini soddalashtiradi va murakkab texnik masalalarni qisqa vaqt ichida hal qilishga yordam beradi.
+LabVIEW tarkibida signalni qayta ishlash, matematik hisob-kitoblar, ma’lumotlarni vizuallashtirish, apparat qurilmalar bilan aloqa qilish va avtomatlashtirish uchun ko‘plab instrumentlar mavjud. Bundan tashqari, dastur Arduino, sensorlar, FPGA va boshqa sanoat qurilmalari bilan ishlash imkoniyatini ham taqdim etadi.
+LabVIEWning yana bir muhim jihati — foydalanuvchi interfeysini tez yaratish imkoniyatidir. Turli tugmalar, indikatorlar, grafiklar va boshqaruv elementlari yordamida interaktiv dasturlar ishlab chiqish mumkin. Shu sababli LabVIEW muhandislik va texnik ilovalarni yaratishda eng qulay dasturlardan biri hisoblanadi.
