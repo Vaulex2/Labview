@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRef, useTransition } from "react";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { signOut } from "@/lib/auth/actions";
+import { useSidebar } from "./SidebarContext";
 import type { User } from "@/lib/types";
 
 const navItems = [
@@ -78,6 +79,7 @@ export function AppSidebar({ user }: { user: User }) {
   const t = useTranslations("Sidebar");
   const router = useRouter();
   const [signingOut, startSignOut] = useTransition();
+  const { isOpen } = useSidebar();
 
   // Warm a nav target on hover so switching sections feels instant.
   const prefetched = useRef<Set<string>>(new Set());
@@ -93,7 +95,14 @@ export function AppSidebar({ user }: { user: User }) {
   const isStaff = user.role === "teacher" || user.role === "admin";
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 flex flex-col bg-[#0d1b35] border-r border-[#162d5a] z-30">
+    <aside
+      className={[
+        "fixed left-0 top-0 h-full w-64 flex flex-col bg-[#0d1b35] border-r border-[#162d5a] z-30",
+        "transition-transform duration-300 ease-in-out",
+        "md:translate-x-0",
+        isOpen ? "translate-x-0" : "-translate-x-full",
+      ].join(" ")}
+    >
       {/* Logo */}
       <div className="flex items-center gap-3 px-5 py-5 border-b border-[#162d5a]">
         <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#00b4d8] to-[#0882a0] flex items-center justify-center shadow-[0_0_12px_rgba(0,180,216,0.40)]">

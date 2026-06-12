@@ -19,7 +19,7 @@ export default async function StudioQuizzesPage({
 
   return (
     <div className="min-h-full bg-[#f0f6ff]">
-      <header className="bg-white border-b border-[#deedf7] px-8 py-4 flex items-center justify-between">
+      <header className="bg-white border-b border-[#deedf7] px-4 md:px-8 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-lg font-bold text-[#0d1b35]" style={{ fontFamily: "Outfit, system-ui, sans-serif" }}>{t("navQuizzes")}</h1>
           <p className="text-xs text-[#8fa5bf]">{t("quizzesSubtitle")}</p>
@@ -27,7 +27,7 @@ export default async function StudioQuizzesPage({
         <Link href="/admin/quizzes/new"><Button variant="primary" size="sm">{t("newQuiz")}</Button></Link>
       </header>
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <div className="bg-white border border-[#deedf7] rounded-xl shadow-[0_2px_8px_rgba(13,27,53,0.06)] overflow-hidden">
           {quizzes.length === 0 ? (
             <p className="px-6 py-12 text-center text-sm text-[#8fa5bf]">{t("noQuizzes")}</p>

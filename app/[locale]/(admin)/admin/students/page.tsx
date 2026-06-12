@@ -26,7 +26,7 @@ export default async function StudentsPage({
 
   return (
     <div className="min-h-full bg-[#f0f6ff]">
-      <header className="bg-white border-b border-[#deedf7] px-8 py-4 flex items-center justify-between">
+      <header className="bg-white border-b border-[#deedf7] px-4 md:px-8 py-4 flex items-center justify-between">
         <div>
           <h1
             className="text-lg font-bold text-[#0d1b35]"
@@ -45,18 +45,8 @@ export default async function StudentsPage({
         </div>
       </header>
 
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <div className="bg-white border border-[#deedf7] rounded-xl shadow-[0_2px_8px_rgba(13,27,53,0.06)] overflow-hidden">
-          {/* Table header */}
-          {students.length > 0 && (
-            <div className="px-6 py-3 border-b border-[#f0f6ff] grid grid-cols-[1fr_9rem_5rem_7rem_5rem] gap-4 items-center">
-              <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("studentProfile")}</span>
-              <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colProgress")}</span>
-              <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider text-center">{t("colScore")}</span>
-              <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLastViewed")}</span>
-              <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider"></span>
-            </div>
-          )}
 
           {students.length === 0 ? (
             <div className="px-6 py-16 flex flex-col items-center gap-3">
@@ -69,66 +59,122 @@ export default async function StudentsPage({
               <p className="text-sm text-[#8fa5bf]">{t("noStudents")}</p>
             </div>
           ) : (
-            <div className="divide-y divide-[#f0f6ff]">
-              {students.map((student) => {
-                const initials =
-                  `${student.firstName?.[0] ?? ""}${student.surname?.[0] ?? ""}`.toUpperCase() || "?";
-                const fullName = `${student.firstName} ${student.surname}`.trim() || student.email;
-                return (
-                  <div
-                    key={student.id}
-                    className="px-6 py-4 grid grid-cols-[1fr_9rem_5rem_7rem_5rem] gap-4 items-center hover:bg-[#f8faff] transition-colors"
-                  >
-                    {/* Profile */}
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00b4d8] to-[#0882a0] flex items-center justify-center text-white text-xs font-bold shrink-0">
-                        {initials}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="text-sm font-semibold text-[#0d1b35] truncate">{fullName}</p>
-                        <p className="text-xs text-[#8fa5bf] truncate">{student.email}</p>
-                        {student.studentId && (
-                          <p className="text-[10px] text-[#b0c4d8]">
-                            {t("studentIdLabel")}: {student.studentId}
+            <>
+              {/* ── Desktop table (md+) ── */}
+              <div className="hidden md:block">
+                <div className="px-6 py-3 border-b border-[#f0f6ff] grid grid-cols-[1fr_9rem_5rem_7rem_5rem] gap-4 items-center">
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("studentProfile")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colProgress")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider text-center">{t("colScore")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLastViewed")}</span>
+                  <span></span>
+                </div>
+                <div className="divide-y divide-[#f0f6ff]">
+                  {students.map((student) => {
+                    const initials =
+                      `${student.firstName?.[0] ?? ""}${student.surname?.[0] ?? ""}`.toUpperCase() || "?";
+                    const fullName = `${student.firstName} ${student.surname}`.trim() || student.email;
+                    return (
+                      <div
+                        key={student.id}
+                        className="px-6 py-4 grid grid-cols-[1fr_9rem_5rem_7rem_5rem] gap-4 items-center hover:bg-[#f8faff] transition-colors"
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00b4d8] to-[#0882a0] flex items-center justify-center text-white text-xs font-bold shrink-0">
+                            {initials}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-semibold text-[#0d1b35] truncate">{fullName}</p>
+                            <p className="text-xs text-[#8fa5bf] truncate">{student.email}</p>
+                            {student.studentId && (
+                              <p className="text-[10px] text-[#b0c4d8]">
+                                {t("studentIdLabel")}: {student.studentId}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-[10px] text-[#8fa5bf] mb-1">
+                            {student.completedLessons}/{student.totalLessons} {t("lessonsLabel")}
                           </p>
+                          <ProgressBar value={student.completionPercent} size="sm" />
+                        </div>
+                        <div className="flex justify-center">
+                          <Badge variant={scoreBadgeVariant(student.avgQuizScore)}>
+                            {student.avgQuizScore !== null ? `${student.avgQuizScore}%` : "—"}
+                          </Badge>
+                        </div>
+                        <div>
+                          <p className="text-xs text-[#8fa5bf]">
+                            {student.lastActiveAt
+                              ? new Date(student.lastActiveAt).toLocaleDateString()
+                              : "—"}
+                          </p>
+                        </div>
+                        <div className="flex justify-end">
+                          <Link href={`/admin/students/${student.id}`}>
+                            <Button variant="ghost" size="sm">{t("viewDetails")}</Button>
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* ── Mobile cards (< md) ── */}
+              <div className="md:hidden divide-y divide-[#f0f6ff]">
+                {students.map((student) => {
+                  const initials =
+                    `${student.firstName?.[0] ?? ""}${student.surname?.[0] ?? ""}`.toUpperCase() || "?";
+                  const fullName = `${student.firstName} ${student.surname}`.trim() || student.email;
+                  return (
+                    <div key={student.id} className="px-4 py-4 hover:bg-[#f8faff] transition-colors">
+                      {/* Top row: avatar + name + view button */}
+                      <div className="flex items-center justify-between gap-3 mb-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#00b4d8] to-[#0882a0] flex items-center justify-center text-white text-xs font-bold shrink-0">
+                            {initials}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-semibold text-[#0d1b35] truncate">{fullName}</p>
+                            <p className="text-xs text-[#8fa5bf] truncate">{student.email}</p>
+                          </div>
+                        </div>
+                        <Link href={`/admin/students/${student.id}`} className="shrink-0">
+                          <Button variant="ghost" size="sm">{t("viewDetails")}</Button>
+                        </Link>
+                      </div>
+
+                      {/* Progress bar */}
+                      <div className="mb-2">
+                        <p className="text-[10px] text-[#8fa5bf] mb-1">
+                          {student.completedLessons}/{student.totalLessons} {t("lessonsLabel")}
+                        </p>
+                        <ProgressBar value={student.completionPercent} size="sm" />
+                      </div>
+
+                      {/* Meta row: score + last active */}
+                      <div className="flex items-center gap-3 flex-wrap mt-2">
+                        <Badge variant={scoreBadgeVariant(student.avgQuizScore)}>
+                          {student.avgQuizScore !== null ? `${student.avgQuizScore}%` : "—"}
+                        </Badge>
+                        {student.lastActiveAt && (
+                          <span className="text-[11px] text-[#8fa5bf]">
+                            {new Date(student.lastActiveAt).toLocaleDateString()}
+                          </span>
+                        )}
+                        {student.studentId && (
+                          <span className="text-[11px] text-[#b0c4d8]">
+                            #{student.studentId}
+                          </span>
                         )}
                       </div>
                     </div>
-
-                    {/* Completion */}
-                    <div>
-                      <p className="text-[10px] text-[#8fa5bf] mb-1">
-                        {student.completedLessons}/{student.totalLessons} {t("lessonsLabel")}
-                      </p>
-                      <ProgressBar value={student.completionPercent} size="sm" />
-                    </div>
-
-                    {/* Avg quiz score */}
-                    <div className="flex justify-center">
-                      <Badge variant={scoreBadgeVariant(student.avgQuizScore)}>
-                        {student.avgQuizScore !== null ? `${student.avgQuizScore}%` : "—"}
-                      </Badge>
-                    </div>
-
-                    {/* Last active */}
-                    <div>
-                      <p className="text-xs text-[#8fa5bf]">
-                        {student.lastActiveAt
-                          ? new Date(student.lastActiveAt).toLocaleDateString()
-                          : "—"}
-                      </p>
-                    </div>
-
-                    {/* Action */}
-                    <div className="flex justify-end">
-                      <Link href={`/admin/students/${student.id}`}>
-                        <Button variant="ghost" size="sm">{t("viewDetails")}</Button>
-                      </Link>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
       </div>

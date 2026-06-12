@@ -46,10 +46,10 @@ export default async function StudentDetailPage({
 
   return (
     <div className="min-h-full bg-[#f0f6ff]">
-      <header className="bg-white border-b border-[#deedf7] px-8 py-4 flex items-center gap-4">
+      <header className="bg-white border-b border-[#deedf7] px-4 md:px-8 py-4 flex items-center gap-3 flex-wrap">
         <Link
           href="/admin/students"
-          className="text-xs text-[#8fa5bf] hover:text-[#0d1b35] transition-colors flex items-center gap-1.5"
+          className="text-xs text-[#8fa5bf] hover:text-[#0d1b35] transition-colors flex items-center gap-1.5 shrink-0"
         >
           <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/>
@@ -58,24 +58,24 @@ export default async function StudentDetailPage({
         </Link>
         <span className="text-[#deedf7]">/</span>
         <h1
-          className="text-sm font-bold text-[#0d1b35]"
+          className="text-sm font-bold text-[#0d1b35] truncate"
           style={{ fontFamily: "Outfit, system-ui, sans-serif" }}
         >
           {fullName}
         </h1>
       </header>
 
-      <div className="p-8 space-y-6">
+      <div className="p-4 md:p-8 space-y-6">
         {/* Profile card */}
-        <div className="bg-white border border-[#deedf7] rounded-xl p-6 shadow-[0_2px_8px_rgba(13,27,53,0.06)]">
-          <div className="flex items-center gap-5">
-            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#00b4d8] to-[#0882a0] flex items-center justify-center text-white text-xl font-bold shrink-0">
+        <div className="bg-white border border-[#deedf7] rounded-xl p-4 md:p-6 shadow-[0_2px_8px_rgba(13,27,53,0.06)]">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-[#00b4d8] to-[#0882a0] flex items-center justify-center text-white text-lg md:text-xl font-bold shrink-0">
               {initials}
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 <h2
-                  className="text-xl font-bold text-[#0d1b35]"
+                  className="text-lg md:text-xl font-bold text-[#0d1b35]"
                   style={{ fontFamily: "Outfit, system-ui, sans-serif" }}
                 >
                   {fullName}
@@ -95,7 +95,7 @@ export default async function StudentDetailPage({
         </div>
 
         {/* Stats row */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
           <StatCard
             label={t("colProgress")}
             value={`${stats.completedLessons} / ${stats.totalLessons}`}
@@ -114,9 +114,9 @@ export default async function StudentDetailPage({
           />
         </div>
 
-        {/* Lesson progress */}
+        {/* ── Lesson Progress ── */}
         <div className="bg-white border border-[#deedf7] rounded-xl shadow-[0_2px_8px_rgba(13,27,53,0.06)] overflow-hidden">
-          <div className="px-6 py-4 border-b border-[#f0f6ff]">
+          <div className="px-4 md:px-6 py-4 border-b border-[#f0f6ff]">
             <h2
               className="text-sm font-bold text-[#0d1b35]"
               style={{ fontFamily: "Outfit, system-ui, sans-serif" }}
@@ -124,48 +124,69 @@ export default async function StudentDetailPage({
               {t("lessonProgress")}
             </h2>
           </div>
+
           {lessonProgress.length === 0 ? (
             <p className="px-6 py-8 text-center text-sm text-[#8fa5bf]">{t("noStudents")}</p>
           ) : (
             <>
-              <div className="px-6 py-2.5 border-b border-[#f0f6ff] grid grid-cols-[1fr_6rem_7rem_5rem_7rem] gap-4 items-center">
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLesson")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colStatus")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colProgress")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colBestScore")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLastViewed")}</span>
-              </div>
-              <div className="divide-y divide-[#f0f6ff]">
-                {lessonProgress.map((row) => (
-                  <div
-                    key={row.lessonId}
-                    className="px-6 py-3.5 grid grid-cols-[1fr_6rem_7rem_5rem_7rem] gap-4 items-center hover:bg-[#f8faff] transition-colors"
-                  >
-                    <p className="text-sm text-[#0d1b35] truncate font-medium">
-                      {localize(row.lessonTitle, loc)}
-                    </p>
-                    <div>
-                      {row.status === "completed" && (
-                        <Badge variant="success">{t("statusCompleted")}</Badge>
-                      )}
-                      {row.status === "in-progress" && (
-                        <Badge variant="electric">{t("statusInProgress")}</Badge>
-                      )}
-                      {row.status === "not-started" && (
-                        <Badge variant="default">{t("statusNotStarted")}</Badge>
-                      )}
-                    </div>
-                    <div>
+              {/* Desktop table */}
+              <div className="hidden md:block">
+                <div className="px-6 py-2.5 border-b border-[#f0f6ff] grid grid-cols-[1fr_6rem_7rem_5rem_7rem] gap-4 items-center">
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLesson")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colStatus")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colProgress")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colBestScore")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLastViewed")}</span>
+                </div>
+                <div className="divide-y divide-[#f0f6ff]">
+                  {lessonProgress.map((row) => (
+                    <div
+                      key={row.lessonId}
+                      className="px-6 py-3.5 grid grid-cols-[1fr_6rem_7rem_5rem_7rem] gap-4 items-center hover:bg-[#f8faff] transition-colors"
+                    >
+                      <p className="text-sm text-[#0d1b35] truncate font-medium">
+                        {localize(row.lessonTitle, loc)}
+                      </p>
+                      <div>
+                        {row.status === "completed" && <Badge variant="success">{t("statusCompleted")}</Badge>}
+                        {row.status === "in-progress" && <Badge variant="electric">{t("statusInProgress")}</Badge>}
+                        {row.status === "not-started" && <Badge variant="default">{t("statusNotStarted")}</Badge>}
+                      </div>
                       <ProgressBar value={row.progressPercent} size="sm" />
+                      <p className="text-xs text-[#4a6080] font-medium">
+                        {row.quizBestScore !== null ? `${row.quizBestScore}%` : "—"}
+                      </p>
+                      <p className="text-xs text-[#8fa5bf]">
+                        {row.lastViewedAt ? new Date(row.lastViewedAt).toLocaleDateString() : "—"}
+                      </p>
                     </div>
-                    <p className="text-xs text-[#4a6080] font-medium">
-                      {row.quizBestScore !== null ? `${row.quizBestScore}%` : "—"}
-                    </p>
-                    <p className="text-xs text-[#8fa5bf]">
-                      {row.lastViewedAt
-                        ? new Date(row.lastViewedAt).toLocaleDateString()
-                        : "—"}
-                    </p>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile cards */}
+              <div className="md:hidden divide-y divide-[#f0f6ff]">
+                {lessonProgress.map((row) => (
+                  <div key={row.lessonId} className="px-4 py-4 hover:bg-[#f8faff] transition-colors">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <p className="text-sm font-medium text-[#0d1b35] leading-snug">
+                        {localize(row.lessonTitle, loc)}
+                      </p>
+                      <div className="shrink-0">
+                        {row.status === "completed" && <Badge variant="success">{t("statusCompleted")}</Badge>}
+                        {row.status === "in-progress" && <Badge variant="electric">{t("statusInProgress")}</Badge>}
+                        {row.status === "not-started" && <Badge variant="default">{t("statusNotStarted")}</Badge>}
+                      </div>
+                    </div>
+                    <ProgressBar value={row.progressPercent} size="sm" />
+                    <div className="flex items-center gap-4 mt-2 text-xs text-[#8fa5bf]">
+                      {row.quizBestScore !== null && (
+                        <span className="font-medium text-[#4a6080]">{row.quizBestScore}%</span>
+                      )}
+                      {row.lastViewedAt && (
+                        <span>{new Date(row.lastViewedAt).toLocaleDateString()}</span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -173,9 +194,9 @@ export default async function StudentDetailPage({
           )}
         </div>
 
-        {/* Quiz attempts */}
+        {/* ── Quiz Attempts ── */}
         <div className="bg-white border border-[#deedf7] rounded-xl shadow-[0_2px_8px_rgba(13,27,53,0.06)] overflow-hidden">
-          <div className="px-6 py-4 border-b border-[#f0f6ff]">
+          <div className="px-4 md:px-6 py-4 border-b border-[#f0f6ff]">
             <h2
               className="text-sm font-bold text-[#0d1b35]"
               style={{ fontFamily: "Outfit, system-ui, sans-serif" }}
@@ -183,45 +204,75 @@ export default async function StudentDetailPage({
               {t("quizAttempts")}
             </h2>
           </div>
+
           {quizAttempts.length === 0 ? (
             <p className="px-6 py-8 text-center text-sm text-[#8fa5bf]">
               {t("noQuizAttempts")}
             </p>
           ) : (
             <>
-              <div className="px-6 py-2.5 border-b border-[#f0f6ff] grid grid-cols-[1fr_1fr_5rem_5rem_4rem_7rem] gap-4 items-center">
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colQuiz")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLesson")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colScore")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colResult")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colTime")}</span>
-                <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colDate")}</span>
-              </div>
-              <div className="divide-y divide-[#f0f6ff]">
-                {quizAttempts.map((attempt) => (
-                  <div
-                    key={attempt.id}
-                    className="px-6 py-3.5 grid grid-cols-[1fr_1fr_5rem_5rem_4rem_7rem] gap-4 items-center hover:bg-[#f8faff] transition-colors"
-                  >
-                    <p className="text-sm text-[#0d1b35] truncate font-medium">
-                      {localize(attempt.quizTitle, loc)}
-                    </p>
-                    <p className="text-xs text-[#8fa5bf] truncate">
-                      {localize(attempt.lessonTitle, loc)}
-                    </p>
-                    <p className="text-xs font-semibold text-[#4a6080]">
-                      {attempt.score}/{attempt.maxScore}
-                      <span className="text-[10px] text-[#8fa5bf] ml-1">({attempt.percentage}%)</span>
-                    </p>
-                    <div>
+              {/* Desktop table */}
+              <div className="hidden md:block">
+                <div className="px-6 py-2.5 border-b border-[#f0f6ff] grid grid-cols-[1fr_1fr_5rem_5rem_4rem_7rem] gap-4 items-center">
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colQuiz")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colLesson")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colScore")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colResult")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colTime")}</span>
+                  <span className="text-[10px] font-semibold text-[#8fa5bf] uppercase tracking-wider">{t("colDate")}</span>
+                </div>
+                <div className="divide-y divide-[#f0f6ff]">
+                  {quizAttempts.map((attempt) => (
+                    <div
+                      key={attempt.id}
+                      className="px-6 py-3.5 grid grid-cols-[1fr_1fr_5rem_5rem_4rem_7rem] gap-4 items-center hover:bg-[#f8faff] transition-colors"
+                    >
+                      <p className="text-sm text-[#0d1b35] truncate font-medium">
+                        {localize(attempt.quizTitle, loc)}
+                      </p>
+                      <p className="text-xs text-[#8fa5bf] truncate">
+                        {localize(attempt.lessonTitle, loc)}
+                      </p>
+                      <p className="text-xs font-semibold text-[#4a6080]">
+                        {attempt.score}/{attempt.maxScore}
+                        <span className="text-[10px] text-[#8fa5bf] ml-1">({attempt.percentage}%)</span>
+                      </p>
                       <Badge variant={attempt.passed ? "success" : "danger"}>
                         {attempt.passed ? t("passed") : t("failed")}
                       </Badge>
+                      <p className="text-xs text-[#8fa5bf]">{formatTime(attempt.timeSpentSeconds)}</p>
+                      <p className="text-xs text-[#8fa5bf]">
+                        {new Date(attempt.completedAt).toLocaleDateString()}
+                      </p>
                     </div>
-                    <p className="text-xs text-[#8fa5bf]">{formatTime(attempt.timeSpentSeconds)}</p>
-                    <p className="text-xs text-[#8fa5bf]">
-                      {new Date(attempt.completedAt).toLocaleDateString()}
-                    </p>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile cards */}
+              <div className="md:hidden divide-y divide-[#f0f6ff]">
+                {quizAttempts.map((attempt) => (
+                  <div key={attempt.id} className="px-4 py-4 hover:bg-[#f8faff] transition-colors">
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-[#0d1b35] truncate">
+                          {localize(attempt.quizTitle, loc)}
+                        </p>
+                        <p className="text-xs text-[#8fa5bf] truncate">
+                          {localize(attempt.lessonTitle, loc)}
+                        </p>
+                      </div>
+                      <Badge variant={attempt.passed ? "success" : "danger"} >
+                        {attempt.passed ? t("passed") : t("failed")}
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-[#8fa5bf] flex-wrap">
+                      <span className="font-semibold text-[#4a6080]">
+                        {attempt.score}/{attempt.maxScore} ({attempt.percentage}%)
+                      </span>
+                      <span>{formatTime(attempt.timeSpentSeconds)}</span>
+                      <span>{new Date(attempt.completedAt).toLocaleDateString()}</span>
+                    </div>
                   </div>
                 ))}
               </div>

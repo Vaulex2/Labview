@@ -21,11 +21,11 @@ export default async function EditQuizPage({
 
   return (
     <div className="min-h-full bg-[#f0f6ff]">
-      <header className="bg-white border-b border-[#deedf7] px-8 py-4">
+      <header className="bg-white border-b border-[#deedf7] px-4 md:px-8 py-4">
         <h1 className="text-lg font-bold text-[#0d1b35]" style={{ fontFamily: "Outfit, system-ui, sans-serif" }}>{t("editQuiz")}</h1>
         <p className="text-xs text-[#8fa5bf]">{t("quizEditorSubtitle")}</p>
       </header>
-      <div className="p-8">
+      <div className="p-4 md:p-8">
         <QuizEditor
           initial={quiz}
           lessons={lessons.map(({ lesson }) => ({ id: lesson.id, title: lesson.title }))}

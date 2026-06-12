@@ -46,7 +46,7 @@ export default async function StudioDashboard({
 
   return (
     <div className="min-h-full bg-[#f0f6ff]">
-      <header className="bg-white border-b border-[#deedf7] px-8 py-4 flex items-center justify-between">
+      <header className="bg-white border-b border-[#deedf7] px-4 md:px-8 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-lg font-bold text-[#0d1b35]" style={{ fontFamily: "Outfit, system-ui, sans-serif" }}>{t("dashboardTitle")}</h1>
           <p className="text-xs text-[#8fa5bf]">{t("dashboardSubtitle")}</p>
@@ -56,7 +56,7 @@ export default async function StudioDashboard({
         </Link>
       </header>
 
-      <div className="p-8 space-y-8">
+      <div className="p-4 md:p-8 space-y-8">
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
           {stats.map((s) => <StatCard key={s.label} {...s} />)}

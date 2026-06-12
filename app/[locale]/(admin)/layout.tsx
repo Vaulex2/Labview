@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
-import { Link } from "@/i18n/navigation";
 import { getSessionUser, isStaff } from "@/lib/auth/session";
+import { AdminShell } from "@/components/layout/AdminShell";
 
 export default async function AdminLayout({
   children,
@@ -13,7 +13,6 @@ export default async function AdminLayout({
   const { locale } = await params;
   const t = await getTranslations("Studio");
 
-  // Authoritative staff check (defense-in-depth alongside the proxy).
   const user = await getSessionUser();
   if (!user) redirect(`/${locale}/login`);
   if (!isStaff(user)) redirect(`/${locale}/dashboard`);
@@ -58,53 +57,21 @@ export default async function AdminLayout({
       ),
     },
   ];
+
   const initials =
     `${user.firstName?.[0] ?? ""}${user.surname?.[0] ?? ""}`.toUpperCase() || "U";
 
   return (
-    <div className="min-h-screen bg-[#f0f6ff] flex">
-      <aside className="fixed left-0 top-0 h-full w-60 bg-[#0d1b35] flex flex-col border-r border-[#162d5a]">
-        <div className="px-5 py-5 border-b border-[#162d5a]">
-          <p className="text-white font-bold text-lg font-[family-name:var(--font-outfit)]">
-            Graphi<span className="text-[#22d3ee]">Code</span>
-          </p>
-          <p className="text-[10px] text-[#8fa5bf] tracking-wider mt-0.5">{t("panelTitle")}</p>
-        </div>
-        <nav className="flex-1 px-3 py-4 space-y-0.5">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#8fa5bf] hover:text-white hover:bg-[rgba(255,255,255,0.06)] transition-colors duration-150"
-            >
-              <span className="shrink-0 opacity-50">{item.icon}</span>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="px-3 pb-4 border-t border-[#162d5a] pt-3 space-y-3">
-          <div className="flex items-center gap-3 px-2">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00b4d8] to-[#0882a0] flex items-center justify-center text-white text-xs font-bold shrink-0">
-              {initials}
-            </div>
-            <div className="overflow-hidden">
-              <p className="text-xs font-semibold text-white truncate">
-                {`${user.firstName} ${user.surname}`.trim() || user.email}
-              </p>
-              <p className="text-[10px] text-[#22d3ee] uppercase tracking-wider">
-                {user.role === "admin" ? t("roleAdmin") : t("roleTeacher")}
-              </p>
-            </div>
-          </div>
-          <Link
-            href="/dashboard"
-            className="block px-2 text-xs text-[#8fa5bf] hover:text-white transition-colors"
-          >
-            {t("backToApp")}
-          </Link>
-        </div>
-      </aside>
-      <main className="flex-1 ml-60 min-h-screen">{children}</main>
-    </div>
+    <AdminShell
+      initials={initials}
+      fullName={`${user.firstName} ${user.surname}`.trim() || user.email}
+      role={user.role}
+      roleLabel={user.role === "admin" ? t("roleAdmin") : t("roleTeacher")}
+      backLabel={t("backToApp")}
+      panelTitle={t("panelTitle")}
+      nav={nav}
+    >
+      {children}
+    </AdminShell>
   );
 }
